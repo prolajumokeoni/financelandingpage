@@ -5,6 +5,7 @@
     <!-- Leaf decorations -->
     <span class="absolute top-[20%] right-[30%] w-[30px] pointer-events-none">
       <svg viewBox="0 0 30 38" fill="none"><path d="M15 2C15 2 2 10 2 22c0 9 6 14 13 14s13-5 13-14C28 10 15 2 15 2z" fill="#1a2a1a" opacity=".5"/></svg>
+  
     </span>
     <span class="absolute top-[38%] left-[42%] w-6 pointer-events-none">
       <svg viewBox="0 0 30 38" fill="none"><path d="M15 2C15 2 2 10 2 22c0 9 6 14 13 14s13-5 13-14C28 10 15 2 15 2z" fill="#1a2a1a" opacity=".4"/></svg>
@@ -16,13 +17,15 @@
       <svg viewBox="0 0 30 38" fill="none"><path d="M15 2C15 2 2 10 2 22c0 9 6 14 13 14s13-5 13-14C28 10 15 2 15 2z" fill="#44C486" opacity=".25"/></svg>
     </span>
 
-    <!-- Curved green lines -->
-    <svg class="absolute right-[15%] -top-10 w-[220px] h-[500px] pointer-events-none" viewBox="0 0 300 600" fill="none">
-      <path d="M280 10 Q320 200 200 280 Q80 360 120 560" stroke="#B2EDA1" stroke-width="3" stroke-linecap="round" fill="none"/>
-    </svg>
-    <svg class="absolute right-[35%] bottom-0 w-[140px] h-[300px] pointer-events-none" viewBox="0 0 200 400" fill="none">
-      <path d="M10 10 Q60 100 40 200 Q20 300 100 380" stroke="#B2EDA1" stroke-width="2" stroke-linecap="round" fill="none" opacity=".5"/>
-    </svg>
+   
+
+     <span class="absolute top-0 left-0 pointer-events-none z-10 h-full">
+            <img :src="ribbonOne"  class="w-full"/>
+          </span>
+
+          <span class="absolute -bottom-4 left-[5%] pointer-events-none z-10 h-full">
+            <img :src="ribbonTwo" class="w-full" />
+          </span>
 
     <div class="container">
       <div class="grid grid-cols-2 gap-12 items-center max-[991px]:grid-cols-1 max-[991px]:gap-10">
@@ -102,6 +105,10 @@
 </template>
 
 <script setup>
+
+import ribbonOne from '~/assets/images/hero/ribbonone.svg'
+import ribbonTwo from '~/assets/images/hero/ribbontwo.svg'
+
 const heroWords = ['Easier', 'Accountable', 'Unbeatable']
 const wordIdx = ref(0)
 let wordTimer

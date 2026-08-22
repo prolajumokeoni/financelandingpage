@@ -119,8 +119,8 @@
 </template>
 
 <script setup>
-import logoDefault from '~/assets/images/logo.svg'
-import logoScroll  from '~/assets/images/logoscroll.png'
+import logoDefault from '~/assets/images/icons/logo.svg'
+import logoScroll  from '~/assets/images/icons/logoscroll.png'
 // ── State ────────────────────────────────────────────────────────────────────
 const isSticky  = ref(false)
 const mobileOpen = ref(false)
