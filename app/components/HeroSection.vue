@@ -1,45 +1,25 @@
 
 <template>
-  <section class="relative overflow-hidden bg-[#1f2334] pt-[170px] pb-[90px] max-[991px]:pt-[130px] max-[991px]:pb-[60px]">
+  <section class="relative overflow-hidden bg-[#1f2334] pt-[247px] pb-[212px] ">
 
-    <!-- Leaf decorations -->
-    <span class="absolute top-[20%] right-[30%] w-[30px] pointer-events-none">
-      <svg viewBox="0 0 30 38" fill="none"><path d="M15 2C15 2 2 10 2 22c0 9 6 14 13 14s13-5 13-14C28 10 15 2 15 2z" fill="#1a2a1a" opacity=".5"/></svg>
-  
-    </span>
-    <span class="absolute top-[38%] left-[42%] w-6 pointer-events-none">
-      <svg viewBox="0 0 30 38" fill="none"><path d="M15 2C15 2 2 10 2 22c0 9 6 14 13 14s13-5 13-14C28 10 15 2 15 2z" fill="#1a2a1a" opacity=".4"/></svg>
-    </span>
-    <span class="absolute bottom-[18%] left-[24%] w-5 pointer-events-none">
-      <svg viewBox="0 0 30 38" fill="none"><path d="M15 2C15 2 2 10 2 22c0 9 6 14 13 14s13-5 13-14C28 10 15 2 15 2z" fill="#1a2a1a" opacity=".3"/></svg>
-    </span>
-    <span class="absolute top-[18%] left-[24%] w-7 pointer-events-none">
-      <svg viewBox="0 0 30 38" fill="none"><path d="M15 2C15 2 2 10 2 22c0 9 6 14 13 14s13-5 13-14C28 10 15 2 15 2z" fill="#44C486" opacity=".25"/></svg>
-    </span>
-
-   
-
-     <span class="absolute top-0 left-0 pointer-events-none z-10 h-full">
-            <img :src="ribbonOne"  class="w-full"/>
-          </span>
-
-          <span class="absolute -bottom-4 left-[5%] pointer-events-none z-10 h-full">
-            <img :src="ribbonTwo" class="w-full" />
-          </span>
-
-    <div class="container">
+   <div class="container">
       <div class="grid grid-cols-2 gap-12 items-center max-[991px]:grid-cols-1 max-[991px]:gap-10">
 
         <!-- Left text -->
-        <div>
-          <h1 class="text-[60px] max-[991px]:text-[42px] font-extrabold text-white leading-[1.2] mb-[22px] tracking-[-0.5px]">
+      <div>
+          <h1 class="text-[60px] text-[42px] font-extrabold text-white leading-[1.46] mb-[22px] tracking-[-0.5px]">
             Financial Security<br>
             Made
             <span class="inline-grid align-bottom [&>*]:[grid-column:1] [&>*]:[grid-row:1]">
               <!-- ghost of longest word locks slot width — no layout shift on word transition -->
-              <span class="invisible pointer-events-none text-[#B2EDA1] underline decoration-[#44C486] underline-offset-[4px] decoration-[3px]" aria-hidden="true">Accountable</span>
+              <span class="invisible pointer-events-none text-[#B2EDA1]" aria-hidden="true">Accountable</span>
               <Transition name="word" mode="out-in">
-                <span class="text-[#B2EDA1] underline decoration-[#44C486] underline-offset-[4px] decoration-[3px]" :key="wordIdx">{{ heroWords[wordIdx] }}</span>
+                <span class="relative inline-block text-[#B2EDA1] justify-self-start" :key="wordIdx">
+                  {{ heroWords[wordIdx] }}
+                  <span class="absolute left-0 bottom-[-3px] w-full h-[8px] overflow-hidden">
+                    <span class="block w-full h-full bg-[#B2EDA1]  hero-progress"></span>
+                  </span>
+                </span>
               </Transition>
             </span>
           </h1>
@@ -57,12 +37,11 @@
                 <span class="btn-hover block text-base font-bold">Get Start For Free</span>
               </span>
             </a>
-
-            <!-- Let's talk -->
+              <!-- Let's talk -->
             <a href="#" class="group flex items-center gap-2 text-[15px] font-semibold text-white hover:text-[#B2EDA1] transition-colors duration-200 no-underline">
               Let's talk
-              <span class="w-9 h-9 rounded-full border border-white/40 flex items-center justify-center transition-[border-color,background] duration-200 group-hover:border-[#B2EDA1] group-hover:bg-[#B2EDA1]/10">
-                <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <span class="w-9 h-9 rounded-full border border-white/40 flex items-center justify-center transition-[border-color,background] duration-200 group-hover:border-none group-hover:bg-[#44c486]">
+                <svg class="w-[14px] h-[14px] transition-transform duration-200 group-hover:-rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                   <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </span>
@@ -72,7 +51,14 @@
 
       
      <!-- Right video -->
-        <div class="flex justify-end max-[991px]:justify-center">
+        <div class="flex justify-end  relative">
+  <span class="absolute top-[-295px] left-[40px] pointer-events-none z-10 h-full max-[991px]:hidden">
+            <img :src="ribbonOne"  class="w-full"/>
+          </span>
+
+          <span class="absolute -bottom-4 left-[-50px] pointer-events-none z-0 h-full max-[991px]:hidden">
+            <img :src="ribbonTwo" class="w-full" />
+          </span>
           <div class="w-full max-w-[470px] h-[340px] rounded-[30px] overflow-hidden relative">
             <video
               ref="videoEl"
@@ -96,7 +82,13 @@
                 <path d="M8 5v14l11-7L8 5z"/>
               </svg>
             </button>
+            <div>
+        
+            </div>
+
           </div>
+
+ 
         </div>
 
       </div>
@@ -128,7 +120,7 @@ const togglePlay = () => {
 }
 
 onMounted(() => {
-  wordTimer = setInterval(() => { wordIdx.value = (wordIdx.value + 1) % heroWords.length }, 3000)
+  wordTimer = setInterval(() => { wordIdx.value = (wordIdx.value + 1) % heroWords.length }, 3500)
 })
 onUnmounted(() => clearInterval(wordTimer))
 </script>
@@ -139,6 +131,13 @@ onUnmounted(() => clearInterval(wordTimer))
 .word-enter-active, .word-leave-active { transition: opacity .3s, transform .3s; }
 .word-enter-from { opacity: 0; transform: translateY(12px); }
 .word-leave-to  { opacity: 0; transform: translateY(-12px); }
+
+/* Hero word progress bar */
+@keyframes heroProgress { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+.hero-progress {
+  animation: heroProgress 4.5s linear forwards;
+  transform-origin: left center;
+}
 
 /* Button sliding text — uses translate(-50%, 80%) which has no Tailwind equivalent */
 .btn-normal { transition: transform .5s cubic-bezier(.15,.85,.31,1), opacity .4s; }
