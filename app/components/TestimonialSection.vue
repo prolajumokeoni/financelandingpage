@@ -20,28 +20,24 @@
               <circle cx="0" cy="0" r="200" fill="#004D42" mask="url(#crescent-mask)"/>
             </svg>
             <!-- Arch shapes — anchored to bottom, fills most of panel -->
-            <img :src="behindImg" class="absolute bottom-0 left-1/2 -translate-x-1/2" aria-hidden="true" />
+            <img :src="behindImg" class="absolute bottom-0 left-1/2 -translate-x-1/2 mb-10" aria-hidden="true" />
             <!-- Person — bottom-aligned, narrower so dark teal arch stays visible -->
-            <Transition name="testi-img" mode="out-in">
               <img
                 :key="active"
                 :src="testimonials[active].img"
                 :alt="testimonials[active].name"
-                class="absolute bottom-0 left-1/2 -translate-x-1/2  w-auto   object-contain object-top z-[1]"
+                class="absolute bottom-0 left-1/2 -translate-x-1/2  w-auto mb-10  object-contain object-top z-[1]"
               />
-            </Transition>
           </div>
 
           <!-- Right: quote content -->
           <div class="pt-14 pb-12 pr-14 pl-8 flex flex-col justify-center">
             <img :src="quoteIcon" class="w-[60px] mb-7" aria-hidden="true" />
-            <Transition name="testi-fade" mode="out-in">
               <div :key="active">
                 <p class="text-[17px] leading-[34px] text-[#1f2334] mb-7">{{ testimonials[active].quote }}</p>
                 <span class="block text-base font-bold text-[#1f2334]">{{ testimonials[active].name }}</span>
                 <span class="text-sm text-[#888]">{{ testimonials[active].role }}</span>
               </div>
-            </Transition>
           </div>
 
         </div>
