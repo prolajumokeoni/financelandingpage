@@ -14,10 +14,13 @@ type HydrationStrategies = {
 type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }> & T
 
 
+export const CtaSection: typeof import("../app/components/CtaSection.vue")['default']
 export const FeatureCard: typeof import("../app/components/FeatureCard.vue")['default']
 export const FooterSection: typeof import("../app/components/FooterSection.vue")['default']
 export const HeroSection: typeof import("../app/components/HeroSection.vue")['default']
 export const Navigation: typeof import("../app/components/Navigation.vue")['default']
+export const TestimonialSection: typeof import("../app/components/TestimonialSection.vue")['default']
+export const WhyChooseUs: typeof import("../app/components/WhyChooseUs.vue")['default']
 export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
 export const NuxtLayout: typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
 export const NuxtErrorBoundary: typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -42,10 +45,13 @@ export const Head: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
+export const LazyCtaSection: LazyComponent<typeof import("../app/components/CtaSection.vue")['default']>
 export const LazyFeatureCard: LazyComponent<typeof import("../app/components/FeatureCard.vue")['default']>
 export const LazyFooterSection: LazyComponent<typeof import("../app/components/FooterSection.vue")['default']>
 export const LazyHeroSection: LazyComponent<typeof import("../app/components/HeroSection.vue")['default']>
 export const LazyNavigation: LazyComponent<typeof import("../app/components/Navigation.vue")['default']>
+export const LazyTestimonialSection: LazyComponent<typeof import("../app/components/TestimonialSection.vue")['default']>
+export const LazyWhyChooseUs: LazyComponent<typeof import("../app/components/WhyChooseUs.vue")['default']>
 export const LazyNuxtWelcome: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
 export const LazyNuxtLayout: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
 export const LazyNuxtErrorBoundary: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>
