@@ -19,8 +19,10 @@
               </defs>
               <circle cx="0" cy="0" r="200" fill="#004D42" mask="url(#crescent-mask)"/>
             </svg>
+            <!-- Swoosh arc — behind arch shapes -->
+            <img :src="swooshArc" class="absolute bottom-0 left-0 object-contain h-[300px] top-0 pointer-events-none select-none" aria-hidden="true" style="z-index:0" />
             <!-- Arch shapes — anchored to bottom, fills most of panel -->
-            <img :src="behindImg" class="absolute bottom-0 left-1/2 -translate-x-1/2 mb-10" aria-hidden="true" />
+            <img :src="behindImg" class="absolute bottom-0 left-1/2 -translate-x-1/2 mb-10" aria-hidden="true" style="z-index:1" />
             <!-- Person — bottom-aligned, narrower so dark teal arch stays visible -->
               <img
                 :key="active"
@@ -34,9 +36,9 @@
           <div class="pt-14 pb-12 pr-14 pl-8 flex flex-col justify-center">
             <img :src="quoteIcon" class="w-[60px] mb-7" aria-hidden="true" />
               <div :key="active">
-                <p class="text-[17px] leading-[34px] text-[#1f2334] mb-7">{{ testimonials[active].quote }}</p>
-                <span class="block text-base font-bold text-[#1f2334]">{{ testimonials[active].name }}</span>
-                <span class="text-sm text-[#888]">{{ testimonials[active].role }}</span>
+                <p class="text-[18px] font-medium leading-[30px] text-[rgb(17,17,17)] mb-7">{{ testimonials[active].quote }}</p>
+                <span class="block text-[18px] font-extrabold leading-[30px] text-[#1f2334]">{{ testimonials[active].name }}</span>
+                <span class="text-[16px] font-medium">{{ testimonials[active].role }}</span>
               </div>
           </div>
 
@@ -59,7 +61,6 @@
                 :src="t.logo"
                 :alt="t.brand"
                 class="h-7 max-w-[90px] object-contain transition-opacity duration-300"
-                :class="active === i ? 'opacity-100' : 'opacity-35'"
               />
             </button>
           </div>
@@ -72,6 +73,7 @@
 
 <script setup>
 import behindImg  from '~/assets/images/progress/behindimage.svg'
+import swooshArc  from '~/assets/images/progress/swoosh-arc.png'
 import quoteIcon  from '~/assets/images/progress/download (7).svg'
 
 import firstImg   from '~/assets/images/progress/firstprogress.png'
@@ -135,12 +137,12 @@ let timer
 const selectActive = (i) => {
   active.value = i
   clearInterval(timer)
-  timer = setInterval(advance, 6000)
+  timer = setInterval(advance, 10000)
 }
 
 const advance = () => { active.value = (active.value + 1) % testimonials.length }
 
-onMounted(() => { timer = setInterval(advance, 6000) })
+onMounted(() => { timer = setInterval(advance, 10000) })
 onUnmounted(() => clearInterval(timer))
 </script>
 

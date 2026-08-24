@@ -1,10 +1,6 @@
 <template>
   <div>
-      <!-- ─────────────── SCROLL PROGRESS ─────────────── -->
-    <div class="fixed top-0 left-0 right-0 h-[3px] z-[200] pointer-events-none overflow-hidden">
-      <div class="h-full bg-[#44C486]" :style="{ width: scrollProgress + '%' }"></div>
-    </div>
-
+   
     <!-- ─────────────── SCROLL TO TOP ─────────────── -->
     <Transition name="fade">
       <button
