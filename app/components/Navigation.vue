@@ -4,9 +4,11 @@
     <div
       ref="containerEl"
       class="relative mx-auto h-[80px] flex items-center overflow-hidden"
-      :style="(isSticky || isMobile)
-        ? { width: '100%', borderRadius: '0', marginTop: '0', paddingInline: '15px' }
-        : { width: '85%', borderRadius: '40px', marginTop: '20px', paddingInline: '15px' }"
+      :style="isSticky
+        ? { width: '100%', borderRadius: '0', marginTop: '0', paddingInline: isMobile ? '15px' : 'calc(7.5% + 15px)' }
+        : isMobile
+          ? { width: '100%', borderRadius: '0', marginTop: '0', paddingInline: '15px' }
+          : { width: '85%', borderRadius: '40px', marginTop: '20px', paddingInline: '15px' }"
       :class="isSticky
         ? 'bg-white/60 shadow-[0_10px_15px_rgba(0,0,0,0.05)] backdrop-blur-[10px]'
         : 'bg-white/10 backdrop-blur-[2.5px] '"
@@ -39,14 +41,16 @@
           aria-label="Main navigation"
           class="flex items-center list-none m-0 p-0"
           @keydown="onKey"
+          @focusout="onNavFocusOut"
         >
           <li
             v-for="(item, i) in navItems" :key="item"
             role="tab"
-            :tabindex="i === activeIdx ? 0 : -1"
+            tabindex="0"
             :aria-selected="i === activeIdx"
             class="relative z-10 cursor-pointer rounded-[30px] outline-none nav-tab"
             @mouseenter="onHover($event, i)"
+            @focus="onTabFocus(i)"
             @click="onSelect($event, i)"
           >
             <!-- Per-tab indicator — inset-y-[3px] keeps it shorter than full li height -->
@@ -142,7 +146,8 @@ const mobileOpen = ref(false)
 const navItems   = ['Home', 'Pages', 'Services', 'Blogs', 'Contact Us']
 const activeIdx  = ref(0)
 const hoverIdx   = ref(null)
-const targetIdx  = computed(() => hoverIdx.value ?? activeIdx.value)
+const kbIdx      = ref(null)   // tab focused via keyboard (null = no keyboard focus in tablist)
+const targetIdx  = computed(() => hoverIdx.value ?? kbIdx.value ?? activeIdx.value)
 
 // ── Pill (full container → contracts to hovered nav link) ─────────────────────
 const containerEl = ref(null)
@@ -157,7 +162,7 @@ const TAB_H      = 36  // h-9
 
 const measureFull = () => {
   if (!containerEl.value) return
-  if (hoverIdx.value === null) {
+  if (hoverIdx.value === null && kbIdx.value === null) {
     pillX.value = GAP
     pillW.value = containerEl.value.offsetWidth - GAP * 2
     pillH.value = containerEl.value.offsetHeight - GAP * 2
@@ -188,22 +193,57 @@ const onSelect = (e, i) => {
   pillH.value = (containerEl.value?.offsetHeight ?? 0) - GAP * 2
 }
 
-// keyboard: shrink to focused item
+// keyboard: shrink pill to focused item
 const measureAt = (i) => {
   const el = navEl.value?.querySelectorAll('[role="tab"]')[i]
   if (!el || !containerEl.value) return
-  pillX.value = el.getBoundingClientRect().left - containerEl.value.getBoundingClientRect().left
-  pillW.value = el.getBoundingClientRect().width
+  const rect = el.getBoundingClientRect()
+  pillX.value = rect.left - containerEl.value.getBoundingClientRect().left
+  pillW.value = rect.width
+  pillH.value = TAB_H
+}
+
+const expandPill = () => {
+  pillX.value = GAP
+  pillW.value = (containerEl.value?.offsetWidth ?? 0) - GAP * 2
+  pillH.value = (containerEl.value?.offsetHeight ?? 0) - GAP * 2
+}
+
+const onTabFocus = (i) => {
+  kbIdx.value = i
+  measureAt(i)
+}
+
+const onNavFocusOut = (e) => {
+  // Only reset when focus leaves the tablist entirely
+  if (!navEl.value?.contains(e.relatedTarget)) {
+    kbIdx.value = null
+    if (hoverIdx.value === null) expandPill()
+  }
 }
 
 const onKey = (e) => {
   const n = navItems.length
-  const next = { ArrowRight: (activeIdx.value + 1) % n, ArrowLeft: (activeIdx.value - 1 + n) % n, Home: 0, End: n - 1 }
-  if (!(e.key in next)) return
+  const curr = kbIdx.value ?? activeIdx.value
+
+  // Activate focused tab
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault()
+    activeIdx.value = curr
+    return
+  }
+
+  const nextMap = {
+    ArrowRight: (curr + 1) % n,
+    ArrowLeft:  (curr - 1 + n) % n,
+    Home: 0,
+    End:  n - 1,
+  }
+  if (!(e.key in nextMap)) return
   e.preventDefault()
-  activeIdx.value = next[e.key]
-  measureAt(activeIdx.value)
-  navEl.value?.querySelectorAll('[role="tab"]')[activeIdx.value]?.focus()
+  kbIdx.value = nextMap[e.key]
+  measureAt(kbIdx.value)
+  navEl.value?.querySelectorAll('[role="tab"]')[kbIdx.value]?.focus()
 }
 
 // ── Scroll & resize ───────────────────────────────────────────────────────────
