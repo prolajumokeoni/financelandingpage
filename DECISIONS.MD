@@ -1,8 +1,6 @@
 # DECISIONS.md
 
-**Live URL:** https://financelanding-ivory.vercel.app/
-**Reference — finance page:** https://staco-react.vercel.app/finance
-**Reference — tab bar:** https://motion-tabs.vercel.app/
+**Live URL:** https://financelanding-ivory.vercel.app/ 
 
 ---
 
@@ -59,7 +57,7 @@ When `prefers-reduced-motion: reduce` is set, the `.nav-slide` CSS transition is
 
 ## Lighthouse scores (mobile)
 
-> _(Screenshot to be added)_
+<img width="1440" height="900" alt="Image" src="https://github.com/user-attachments/assets/d14b33ef-46cd-4e0d-b8a7-df744c858070" />
 
 ---
 
